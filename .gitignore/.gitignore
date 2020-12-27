@@ -1,0 +1,97 @@
+*.py[cod]
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+/*.egg-info/*
+/*/*.egg-info/*
+/*/*/*.egg-info/*
+dist
+# build
+eggs
+parts
+var
+sdist
+develop-eggs
+.installed.cfg
+lib64
+pip-log.txt
+
+# Installer logs
+pip-log.txt
+
+# npm logs
+npm-debug.log
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+# Jetbrains metadata
+.idea
+
+# VSCode workspace configuration
+.vscode
+!.vscode/extensions.json
+
+# etags/ctags files
+**/TAGS
+**/etags
+
+#ignore environment.local.yaml
+environment.local.yaml
+
+# ignore temporary swap files
+*.swp
+
+*~
+.DS_Store
+
+# celerybeat file
+celerybeat-schedule.db
+
+# ignore gatk log
+out.log
+
+# sass cache and generated css sourcemap files
+.sass-cache
+*.css.map
+# sass compiled files
+**/sass/*.css
+
+# JS Test Coverage
+coverage
+
+# Stellar symlink (also used in integration testing so ignore in root only)
+/stellar.yaml
+
+node_modules
+
+# iPython config
+config/ipython/profile_default/startup/README
+
+perfdump.db
+
+# docker-sync daemon logs
+/build/docker_config/.docker-sync/*
+# .ec2 directory copied to docker directory
+
+# Sphinx
+docs/_buil
+
+# No package-lock.json anywhere. Only use yarn.lock
+package-lock.json
+# No node_modules, anywhere
+node_modules

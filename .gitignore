@@ -95,3 +95,6 @@ docs/_buil
 package-lock.json
 # No node_modules, anywhere
 node_modules
+
+# virtualenv (& more)
+local/*

@@ -11,11 +11,11 @@ def list_subscibed_shows():
         show = item['show']
         result = {
             'id': show['id'],
-            'name':show['name']
+            'name': show['name']
         }
         results.append(result)
     return results
 
 if __name__ == "__main__":
-    results=list_subscibed_shows()
+    results = list_subscibed_shows()
     print(results)

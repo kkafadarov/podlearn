@@ -28,7 +28,7 @@ def list_last_episodes(sp, show):
         result =  {
             'id': episode['id'],
             'name': episode['name'],
-            'resume_point' : episode['resume_point']
+            'resume_point': episode['resume_point']
         }
         episodes.append(result)
     return episodes

@@ -28,7 +28,9 @@ def list_last_episodes(sp, show):
         result =  {
             'id': episode['id'],
             'name': episode['name'],
+            'duration_ms': episode['duration_ms'],
             'resume_point': episode['resume_point']
+
         }
         episodes.append(result)
     return episodes
@@ -41,16 +43,25 @@ def list_shows(sp,shows):
     for show in shows:
         show_episodes =list_last_episodes(sp, show)
         episodes += show_episodes
-    return  episodes
+    return episodes
 
 def filter_episodes(sp,episodes):
     """
-    Filter unwatched episodes, return only watched
+    Filter unwatched episodes, return only watched >50%
     """
-
+    filtrd_episodes = []
+    for episode in episodes:
+        duration = episode['duration_ms']
+        resume_point = episode['resume_point']
+        if resume_point['fully_played']:
+           filtrd_episodes.append(episode)
+        elif resume_point['resume_position_ms'] > duration / 2 :
+            filtrd_episodes.append(episode)
+    return filtrd_episodes
 
 if __name__ == "__main__":
     sp = instantiate_spotify()
     shows = list_subscibed_shows(sp)
     episodes = list_shows(sp,shows)
+    episodes = filter_episodes(sp,episodes)
     print(episodes)

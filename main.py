@@ -1,7 +1,7 @@
-from spotify_utils import instantiate_spotify, list_subscibed_shows, list_shows
+from spotify_utils import get_latest_user_episodes
+
+
 
 if __name__ == "__main__":
-    sp = instantiate_spotify()
-    shows = list_subscibed_shows(sp)
-    episodes = list_shows(sp,shows)
-    print(episodes)
+    user_episodes = get_latest_user_episodes()
+    print(user_episodes)

@@ -28,27 +28,49 @@ def list_last_episodes(sp, show):
     episodes = []
     data = sp.show_episodes(show['id'], limit=20)
     for episode in data['items']:
-        result =  {
+        result = {
             'id': episode['id'],
             'name': episode['name'],
-            'resume_point': episode['resume_point']
+            'show_name': show['name'],
+            'duration_ms': episode['duration_ms'],
+            'resume_point': episode['resume_point'],
         }
         episodes.append(result)
     return episodes
 
 
-def list_shows(sp, shows):
+def list_show_episodes(sp, shows):
     """
     Get the last of every show
     """
     episodes = []
     for show in shows:
-        show_episodes =list_last_episodes(sp, show)
+        show_episodes = list_last_episodes(sp, show)
         episodes += show_episodes
-    return  episodes
+    return episodes
 
 
-def filter_episodes(sp, episodes):
+def filter_episodes(episodes):
     """
-    Filter unwatched episodes, return only watched
+    Filter down to episodes that the user listened to
     """
+
+    def has_been_listened(episode):
+        resume_point = episode.get('resume_point', None)
+        if not resume_point:
+            return False
+
+        if resume_point['fully_played']:
+            return True
+
+        percentage_listened = (resume_point['resume_position_ms'] / episode['duration_ms']) * 100
+        return percentage_listened > 50
+
+    return [episode for episode in episodes if has_been_listened(episode)]
+
+
+def get_latest_user_episodes():
+    sp = instantiate_spotify()
+    shows = list_subscibed_shows(sp)
+    episodes = list_show_episodes(sp, shows)
+    return filter_episodes(episodes)

@@ -1,10 +1,12 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
+
 def instantiate_spotify():
     scope = "user-library-read user-read-playback-position"
     sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
     return sp
+
 
 def list_subscibed_shows(sp):
     shows = sp.current_user_saved_shows()
@@ -17,6 +19,7 @@ def list_subscibed_shows(sp):
         }
         results.append(result)
     return results
+
 
 def list_last_episodes(sp, show):
     """
@@ -33,7 +36,8 @@ def list_last_episodes(sp, show):
         episodes.append(result)
     return episodes
 
-def list_shows(sp,shows):
+
+def list_shows(sp, shows):
     """
     Get the last of every show
     """
@@ -43,14 +47,8 @@ def list_shows(sp,shows):
         episodes += show_episodes
     return  episodes
 
-def filter_episodes(sp,episodes):
+
+def filter_episodes(sp, episodes):
     """
     Filter unwatched episodes, return only watched
     """
-
-
-if __name__ == "__main__":
-    sp = instantiate_spotify()
-    shows = list_subscibed_shows(sp)
-    episodes = list_shows(sp,shows)
-    print(episodes)

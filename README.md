@@ -1,6 +1,6 @@
 # podlearn
 
-## Environment set up
+## Environment setup
 1. Make sure you have python3 installed
 2. Create a `local` folder to hold your build/environment files
 3. Instantiate a venv -> `python3 -m venv local/virtualenv`

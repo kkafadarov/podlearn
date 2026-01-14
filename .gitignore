@@ -100,3 +100,8 @@ node_modules
 local/*
 
 *.cache
+
+#API Keys
+.secrets
+*.secrets
+

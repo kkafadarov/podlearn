@@ -4,7 +4,7 @@ import sys
 
 def download_audio(url, filename):
     response = requests.get(url, allow_redirects=True)
-    with open(filename, 'wb') as f:
+    with open("audio_files/" + filename + ".mp3", 'wb') as f:
         f.write(response.content)
 
 

@@ -105,3 +105,5 @@ local/*
 .secrets
 *.secrets
 
+podcasting-index.py
+/audio_files/*

@@ -30,7 +30,7 @@ def get_auth_headers():
         'X-Auth-Date': str(epoch_time),
         'X-Auth-Key': api_key,
         'Authorization': hashed_string,
-        'User-Agent': 'postcasting-index-python-cli'
+        'User-Agent': 'PodLearn/1.0'
     }
 
 
@@ -93,6 +93,6 @@ if __name__ == "__main__":
     #print(get_latest_user_episodes()[0])
 
 
-    show = get_shows_feed(sys.argv[1])
-    print(show['url'])
-    get_episodes(show)
+    shows = get_shows_feed(sys.argv[1])
+    print(s['url'] for s in shows)
+    #get_episodes(show)

@@ -75,7 +75,7 @@ def get_episodes(show):
                 'audio_href': entry.enclosures[0]['href'],
             }
 
-def get_filtered_episodes():
+def match_episodes(spotfy_episode):
     a= 0
     #if spotfy_episode['name'] == podindex_episode['title']
     #if spotfy_episode['show_name'] == podindex_show['title']
@@ -84,15 +84,16 @@ def get_filtered_episodes():
 
 
 if __name__ == "__main__":
-    #Getting console arguments
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument(dest='search_query', type=str, help="Query to search podcastindex.org for")
+    # shows = get_shows_feed(sys.argv[1])
+    # for s in shows: 
+    #     print(s['url'])
+    sp_latest_episodes = get_latest_user_episodes()
+    for sp_show, sp_episodes in sp_latest_episodes.items():
+        try:
+           show_feed = get_shows_feed(sp_show)
+        except EmptyResposeError:
+            print("Show not found")
 
-    
+        match_episodes()
 
-    #print(get_latest_user_episodes()[0])
-
-
-    shows = get_shows_feed(sys.argv[1])
-    print(s['url'] for s in shows)
-    #get_episodes(show)
+    # #get_episodes(show)

@@ -31,7 +31,7 @@ def list_last_episodes(sp, show):
         result = {
             'id': episode['id'],
             'name': episode['name'],
-            'show_name': show['name'],
+            #'show_name': show['name'],
             'duration_ms': episode['duration_ms'],
             'resume_point': episode['resume_point'],
         }
@@ -43,10 +43,10 @@ def list_show_episodes(sp, shows):
     """
     Get the last of every show
     """
-    episodes = []
+    episodes = {}
     for show in shows:
         show_episodes = list_last_episodes(sp, show)
-        episodes += show_episodes
+        episodes[show['name']] = show_episodes
     return episodes
 
 
@@ -54,7 +54,6 @@ def filter_episodes(episodes):
     """
     Filter down to episodes that the user listened to
     """
-
     def has_been_listened(episode):
         resume_point = episode.get('resume_point', None)
         if not resume_point:
@@ -66,8 +65,25 @@ def filter_episodes(episodes):
         percentage_listened = (resume_point['resume_position_ms'] / episode['duration_ms']) * 100
         return percentage_listened > 50
 
-    return [episode for episode in episodes if has_been_listened(episode)]
+    filtered_shows = {}
+    for show, show_episodes in episodes.items():
+        result = []
+        for ep in show_episodes:
+            if has_been_listened(ep):
+                result.append(ep)
 
+        if result:
+            filtered_shows[show] = result
+        
+    return filtered_shows
+
+    # return {
+    #     show: [ep for ep in show_episodes if has_been_listened(ep)]
+    #     for show, show_episodes in episodes.items()
+    #     if any(has_been_listened(ep) for ep in show_episodes)
+    # }
+    
+    #return [episode for episode in episodes.values() if has_been_listened(episode)]
 
 def get_latest_user_episodes():
     sp = instantiate_spotify()

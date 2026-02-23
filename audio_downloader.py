@@ -1,5 +1,10 @@
+import re
 import requests
 import sys
+
+
+def sanitize_filename(filename):
+    return re.sub(r'[\\/:*?"<>|]', '-', filename).strip()
 
 
 def download_audio(url, filename):

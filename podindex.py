@@ -113,7 +113,7 @@ def match_episodes(spotfy_episodes):
         try:
             show_feed = get_shows_feed(sp_show)
         except EmptyResposeError:
-            print("Show not found")
+            print(sp_show + ": not found")
             continue
 
         podid_episodes = (get_episodes(show_feed[0]))
